@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Transaction {
 
-
     @Getter
     @EqualsAndHashCode.Include
     @NotNull

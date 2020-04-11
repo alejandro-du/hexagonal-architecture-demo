@@ -1,6 +1,5 @@
 package com.example.bank.domain;
 
-import com.example.bank.domain.Transaction;
 import com.example.bank.port.inbound.exception.InvalidAmountException;
 import org.junit.jupiter.api.Test;
 

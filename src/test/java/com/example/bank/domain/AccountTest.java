@@ -1,7 +1,5 @@
 package com.example.bank.domain;
 
-import com.example.bank.domain.Account;
-import com.example.bank.domain.Transaction;
 import com.example.bank.port.inbound.exception.InsufficientFundsException;
 import com.example.bank.port.inbound.exception.WrongPinException;
 import org.junit.jupiter.api.Test;
@@ -43,7 +41,7 @@ public class AccountTest {
 
         account.performTransaction(new Transaction(SOME_REFERENCE_NUMBER, new BigDecimal(2)), SOME_PIN);
         account.performTransaction(new Transaction(SOME_REFERENCE_NUMBER, new BigDecimal(3)), SOME_PIN);
-        assertThat(account.getBalance()).isEqualTo(new BigDecimal(5));
+        assertThat(account.getBalance(SOME_PIN)).isEqualTo(new BigDecimal(5));
     }
 
     @Test

@@ -45,25 +45,26 @@ public class Account {
 
     public synchronized void performTransaction(Transaction transaction, String pin) {
         checkPin(pin);
-        checkEnoughFunds(transaction.getAmount());
+        checkEnoughFunds(transaction.getAmount(), pin);
         transactions.add(transaction);
     }
 
-    public BigDecimal getBalance() {
+    public BigDecimal getBalance(String pin) {
+        checkPin(pin);
         return transactions.stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public void checkPin(String pin) {
+    private void checkPin(String pin) {
         if (!getPin().equals(pin)) {
             throw new WrongPinException();
         }
     }
 
-    private void checkEnoughFunds(BigDecimal amount) {
+    private void checkEnoughFunds(BigDecimal amount, String pin) {
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
-            if (amount.negate().compareTo(getBalance()) > 0) {
+            if (amount.negate().compareTo(getBalance(pin)) > 0) {
                 throw new InsufficientFundsException();
             }
         }

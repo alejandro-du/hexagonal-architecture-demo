@@ -1,8 +1,5 @@
 package com.example.bank.domain;
 
-import com.example.bank.domain.Account;
-import com.example.bank.domain.Bank;
-import com.example.bank.domain.Transaction;
 import com.example.bank.domain.util.BankMapper;
 import com.example.bank.port.dto.AccountDto;
 import com.example.bank.port.inbound.exception.InvalidAccountException;
@@ -97,7 +94,7 @@ public class BankTest {
 
         bank.deposit(SOME_ACCOUNT_NUMBER, new BigDecimal(2));
         bank.deposit(SOME_ACCOUNT_NUMBER, new BigDecimal(3));
-        assertThat(account.getBalance()).isEqualTo(new BigDecimal(5));
+        assertThat(account.getBalance(SOME_PIN)).isEqualTo(new BigDecimal(5));
     }
 
     @Test
@@ -112,7 +109,7 @@ public class BankTest {
 
         bank.withdraw(SOME_ACCOUNT_NUMBER, new BigDecimal(2), SOME_PIN);
         bank.withdraw(SOME_ACCOUNT_NUMBER, new BigDecimal(3), SOME_PIN);
-        assertThat(account.getBalance()).isEqualTo(new BigDecimal(5));
+        assertThat(account.getBalance(SOME_PIN)).isEqualTo(new BigDecimal(5));
     }
 
     @Test
@@ -133,8 +130,8 @@ public class BankTest {
         Bank bank = new Bank(bookkeeping, bankMapper);
 
         bank.transfer(accountNumber1, accountNumber2, new BigDecimal(3), SOME_PIN);
-        assertThat(account1.getBalance()).isEqualTo(new BigDecimal(7));
-        assertThat(account2.getBalance()).isEqualTo(new BigDecimal(8));
+        assertThat(account1.getBalance(SOME_PIN)).isEqualTo(new BigDecimal(7));
+        assertThat(account2.getBalance(SOME_PIN)).isEqualTo(new BigDecimal(8));
     }
 
 }

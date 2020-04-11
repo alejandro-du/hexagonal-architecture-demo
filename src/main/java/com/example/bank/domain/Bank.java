@@ -78,8 +78,7 @@ public class Bank implements OfficeBankingPort, OnlineBankingPort {
         }
 
         Account account = bankMapper.toAccount(accountDto.get());
-        account.checkPin(pin);
-        return account.getBalance();
+        return account.getBalance(pin);
     }
 
     private void doTransaction(String accountNumber, BigDecimal amount, boolean skipPin, String pin, String referenceNumber) {
